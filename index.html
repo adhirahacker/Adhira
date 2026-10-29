@@ -82,10 +82,9 @@
         <label for="logoUploadInput" class="cursor-pointer group relative w-12 h-12 md:w-14 md:h-14 rounded-full p-0.5 bg-gradient-to-tr from-cyan-400 via-blue-600 to-cyan-200 shadow-electric shrink-0" title="लोगो बदलने के लिए टैप करें">
           <img 
             id="brandNavLogo"
-            src="21295.png" 
-            alt="ADHIRA HACKER LOGO" 
-            class="w-full h-full object-cover rounded-full"
-            onerror="fallbackToDefaultLogo(this)"
+            src="" 
+            alt="ADHIRA HACKER" 
+            class="w-full h-full object-cover rounded-full bg-slate-900"
           >
           <div class="absolute inset-0 bg-black/60 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-200">
             <i class="fa-solid fa-camera text-cyan-300 text-xs"></i>
@@ -132,10 +131,9 @@
         <div class="relative w-36 h-36 md:w-48 md:h-48 rounded-3xl p-1 bg-gradient-to-tr from-cyan-400 via-blue-600 to-purple-600 shadow-lightning mb-4 group transition duration-300">
           <img 
             id="brandHeroLogo"
-            src="21295.png" 
-            alt="ADHIRA HACKER LOGO" 
-            class="w-full h-full object-cover rounded-2xl" 
-            onerror="fallbackToDefaultLogo(this)"
+            src="" 
+            alt="ADHIRA HACKER" 
+            class="w-full h-full object-cover rounded-2xl bg-slate-900" 
           >
           <label for="logoUploadInput" class="absolute inset-0 bg-black/60 rounded-2xl flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 cursor-pointer transition">
             <i class="fa-solid fa-camera text-2xl text-cyan-300 mb-1"></i>
@@ -147,7 +145,7 @@
         </div>
 
         <button onclick="document.getElementById('logoUploadInput').click()" class="text-xs text-cyan-400 hover:text-cyan-200 underline font-mono mb-2 flex items-center gap-1.5">
-          <i class="fa-solid fa-upload"></i> गैलरी से लोगो सेलेक्ट करें
+          <i class="fa-solid fa-upload"></i> गैलरी से अपना लोगो सेलेक्ट करें
         </button>
 
         <h2 class="font-cyber text-2xl md:text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 via-white to-blue-400 tracking-wider">
@@ -174,7 +172,7 @@
           <i class="fa-solid fa-microchip text-neonCyan"></i>
           <span>ALL AI APPS & MOD TOOLS</span>
         </h3>
-        <p class="text-xs text-slate-400 font-mono mt-1">आप किसी भी ऐप का वीडियो बदल सकते हैं, नया वीडियो डाल सकते हैं या नया ऐप जोड़ सकते हैं।</p>
+        <p class="text-xs text-slate-400 font-mono mt-1">ऑफिशियल ऐप्स और टूल्स यहाँ से सीधे डाउनलोड करें।</p>
       </div>
 
       <button onclick="openModal()" class="px-4 py-2 rounded-xl bg-cyan-950 border border-cyan-400/50 text-cyan-300 hover:bg-cyan-900/60 text-xs font-semibold flex items-center gap-2 w-max">
@@ -183,9 +181,40 @@
       </button>
     </div>
 
-    <!-- Apps Catalog Grid -->
+    <!-- Apps Catalog Grid (Permanent HTML Card) -->
     <div id="appsList" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
-      <!-- Cards will render here -->
+      
+      <!-- PRIYA AI OFFICIAL CARD -->
+      <div class="cyber-card rounded-2xl p-5 flex flex-col justify-between">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="px-2.5 py-1 rounded-full bg-cyan-950 border border-cyan-400/40 text-cyan-300 text-[10px] font-mono font-bold">v1.0 - OFFICIAL</span>
+            <span class="text-xs text-slate-400 font-mono"><i class="fa-solid fa-hard-drive text-cyan-400"></i> 38.82 MB</span>
+          </div>
+          <h4 class="font-cyber font-bold text-lg text-white mb-2">PRIYA AI - Personal In-Game Assistant</h4>
+          <p class="text-xs text-slate-300 font-mono mb-4 leading-relaxed">
+            गेम खेलते वक्त लाइव वॉयस चैट, एनिमी अलर्ट, बिना मिनिमाइज किए यूट्यूब पर वॉइस से गाने प्ले करना और बैकग्राउंड ऑटोमेशन।
+          </p>
+          <div class="mb-4">
+            <iframe id="priyaIframe" class="w-full h-44 rounded-xl border border-slate-800" src="https://www.youtube.com/embed/4eMnz8VbgyM" allowfullscreen></iframe>
+          </div>
+        </div>
+        
+        <div class="pt-3 border-t border-cyan-500/20 flex flex-col gap-2">
+          <!-- DIRECT APK DOWNLOAD LINK -->
+          <a href="https://github.com/adhirahacker/Adhira/releases/download/v1.0/PriyaAI.apk" class="w-full py-3.5 bg-gradient-to-r from-neonCyan via-blue-500 to-neonCyan text-black font-cyber font-black text-sm rounded-xl text-center shadow-electric hover:brightness-110 active:scale-95 transition flex items-center justify-center gap-2">
+            <i class="fa-solid fa-download text-base"></i>
+            डाउनलोड करें (Direct APK - 38.82 MB)
+          </a>
+          <button onclick="promptVideoUpdate('priya_ai')" class="w-full py-2 bg-slate-900 border border-red-500/40 hover:bg-red-950/40 text-red-300 text-xs rounded-lg font-mono flex items-center justify-center gap-1.5">
+            <i class="fa-brands fa-youtube"></i> वीडियो लिंक बदलें
+          </button>
+        </div>
+      </div>
+
+      <!-- Container for dynamically added apps -->
+      <div id="dynamicAppsContainer" class="contents"></div>
+
     </div>
 
   </main>
@@ -193,24 +222,21 @@
   <!-- ================= ADD / EDIT APP MODAL ================= -->
   <div id="adminModal" class="fixed inset-0 bg-black/85 backdrop-blur-md z-50 flex items-center justify-center p-4 hidden">
     <div class="cyber-card rounded-2xl w-full max-w-md p-6 relative">
-      
       <button onclick="closeModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white text-xl">
         <i class="fa-solid fa-xmark"></i>
       </button>
 
       <div class="mb-5 text-center">
-        <h3 id="modalHeading" class="font-cyber text-lg md:text-xl text-neonCyan flex items-center justify-center gap-2">
+        <h3 class="font-cyber text-lg md:text-xl text-neonCyan flex items-center justify-center gap-2">
           <i class="fa-solid fa-bolt text-yellow-400"></i>
-          <span>ऐप जोड़ें / अपडेट करें</span>
+          <span>नया ऐप जोड़ें</span>
         </h3>
       </div>
 
       <form id="appForm" class="space-y-4 text-xs">
-        <input type="hidden" id="formAppId" value="">
-
         <div class="bg-slate-900/80 p-3 rounded-xl border border-cyan-500/20">
-          <label class="block font-bold text-cyan-300 mb-1.5">ऐप का नाम (App Name)*</label>
-          <input type="text" id="formTitle" required placeholder="जैसे: PRIYA AI" class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2.5 text-white text-xs focus:outline-none focus:border-neonCyan">
+          <label class="block font-bold text-cyan-300 mb-1.5">ऐप का नाम*</label>
+          <input type="text" id="formTitle" required placeholder="जैसे: Turbo Game Booster" class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2.5 text-white text-xs focus:outline-none focus:border-neonCyan">
         </div>
 
         <div class="bg-slate-900/80 p-3 rounded-xl border border-cyan-500/20">
@@ -219,8 +245,8 @@
         </div>
 
         <div class="bg-slate-900/80 p-3 rounded-xl border border-cyan-500/20">
-          <label class="block font-bold text-cyan-300 mb-1.5">फ़ाइल साइज़ (File Size)</label>
-          <input type="text" id="formSize" placeholder="जैसे: 38.82 MB" class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2.5 text-white text-xs focus:outline-none focus:border-neonCyan">
+          <label class="block font-bold text-cyan-300 mb-1.5">फ़ाइल साइज़</label>
+          <input type="text" id="formSize" placeholder="जैसे: 25 MB" class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2.5 text-white text-xs focus:outline-none focus:border-neonCyan">
         </div>
 
         <div class="bg-slate-900/80 p-3 rounded-xl border border-cyan-500/20">
@@ -235,7 +261,6 @@
           </button>
         </div>
       </form>
-
     </div>
   </div>
 
@@ -250,7 +275,6 @@
         <i class="fa-brands fa-youtube text-red-500"></i>
         <span>YouTube वीडियो बदलें</span>
       </h3>
-      <input type="hidden" id="videoAppTargetId" value="">
       <input type="text" id="newVideoUrlInput" placeholder="https://youtube.com/watch?v=..." class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2.5 text-white text-xs focus:outline-none focus:border-neonCyan mb-4">
 
       <div class="flex justify-end gap-2 text-xs">
@@ -274,23 +298,14 @@
     </div>
   </footer>
 
-  <!-- ================= LOGIC SCRIPT ================= -->
+  <!-- ================= SCRIPT ================= -->
   <script>
-    const fallbackNinjaLogo = "data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 400'%3E%3Cdefs%3E%3ClinearGradient id='bg' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%23050b1a'/%3E%3Cstop offset='100%25' stop-color='%230b1b3d'/%3E%3C/linearGradient%3E%3ClinearGradient id='neon' x1='0%25' y1='0%25' x2='100%25' y2='0%25'%3E%3Cstop offset='0%25' stop-color='%2300e5ff'/%3E%3Cstop offset='100%25' stop-color='%230066ff'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='400' height='400' fill='url(%23bg)'/%3E%3Ccircle cx='200' cy='200' r='160' fill='none' stroke='%2300e5ff' stroke-width='6' stroke-dasharray='12 8'/%3E%3Cpath d='M70 70 L330 330 M330 70 L70 330' stroke='%230066ff' stroke-width='14' stroke-linecap='round'/%3E%3Cpath d='M140 180 C140 130 170 100 200 100 C230 100 260 130 260 180 L250 250 L150 250 Z' fill='%23111827' stroke='%2300e5ff' stroke-width='6'/%3E%3Cpolygon points='160,190 200,165 240,190 220,240 180,240' fill='%231f2937' stroke='%2300e5ff' stroke-width='3'/%3E%3Ccircle cx='180' cy='180' r='7' fill='%2300e5ff' filter='drop-shadow(0 0 8px %2300e5ff)'/%3E%3Ccircle cx='220' cy='180' r='7' fill='%2300e5ff' filter='drop-shadow(0 0 8px %2300e5ff)'/%3E%3Cpolygon points='200,245 185,280 205,280 190,320 225,270 205,270' fill='%23facc15' stroke='%23facc15' stroke-width='2'/%3E%3Crect x='40' y='320' width='320' height='45' rx='10' fill='%23030712' stroke='%2300e5ff' stroke-width='3'/%3E%3Ctext x='200' y='352' font-family='Arial, sans-serif' font-weight='900' font-size='22' fill='%2300e5ff' text-anchor='middle' letter-spacing='2'%3EADHIRA HACKER%3C/text%3E%3C/svg%3E";
-
-    function fallbackToDefaultLogo(imgEl) {
-      const savedLogo = localStorage.getItem('adhira_custom_logo');
-      imgEl.src = savedLogo ? savedLogo : fallbackNinjaLogo;
-    }
+    const defaultNinjaSvg = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'><rect width='200' height='200' rx='30' fill='%23060813'/><circle cx='100' cy='100' r='80' fill='%230d1b2a' stroke='%2300e5ff' stroke-width='4'/><path d='M60 90 Q100 60 140 90 L130 140 Q100 160 70 140 Z' fill='%231b263b' stroke='%230066ff' stroke-width='3'/><circle cx='85' cy='95' r='5' fill='%2300e5ff'/><circle cx='115' cy='95' r='5' fill='%2300e5ff'/><path d='M95 105 L105 105 L90 135 L110 135' stroke='%23facc15' stroke-width='3' fill='none'/><text x='100' y='180' text-anchor='middle' fill='%2300e5ff' font-family='sans-serif' font-weight='bold' font-size='14'>ADHIRA</text></svg>";
 
     function syncLogos() {
-      const savedLogo = localStorage.getItem('adhira_custom_logo');
-      if (savedLogo) {
-        const nav = document.getElementById('brandNavLogo');
-        const hero = document.getElementById('brandHeroLogo');
-        if (nav) nav.src = savedLogo;
-        if (hero) hero.src = savedLogo;
-      }
+      const savedLogo = localStorage.getItem('adhira_custom_logo') || defaultNinjaSvg;
+      document.getElementById('brandNavLogo').src = savedLogo;
+      document.getElementById('brandHeroLogo').src = savedLogo;
     }
 
     function handleLogoUpload(event) {
@@ -300,23 +315,10 @@
       reader.onload = function(e) {
         localStorage.setItem('adhira_custom_logo', e.target.result);
         syncLogos();
-        showToast('लोगो सफलतापूर्वक अपडेट कर दिया गया!');
+        showToast('लोगो सफलतापूर्वक सेट हो गया!');
       };
       reader.readAsDataURL(file);
     }
-
-    // Default Apps with PriyaAI Direct APK Link
-    const defaultApps = [
-      {
-        id: 'priya_ai_flagship',
-        title: 'PRIYA AI - Personal In-Game Assistant',
-        version: 'v1.0 - OFFICIAL',
-        size: '38.82 MB',
-        downloadUrl: 'https://github.com/adhirahacker/Adhira/releases/download/v1.0/PriyaAI.apk',
-        videoId: '4eMnz8VbgyM',
-        desc: 'गेम खेलते वक्त लाइव वॉयस चैट, एनिमी अलर्ट, बिना मिनिमाइज किए यूट्यूब पर वॉइस से गाने प्ले करना और बैकग्राउंड ऑटोमेशन।'
-      }
-    ];
 
     function showToast(msg) {
       const toast = document.getElementById('toast');
@@ -327,18 +329,6 @@
       }, 3000);
     }
 
-    function getApps() {
-      const data = localStorage.getItem('adhira_hacker_db_v2');
-      if (data) {
-        try { return JSON.parse(data); } catch(e) { return defaultApps; }
-      }
-      return defaultApps;
-    }
-
-    function saveApps(apps) {
-      localStorage.setItem('adhira_hacker_db_v2', JSON.stringify(apps));
-    }
-
     function extractYouTubeId(urlOrId) {
       if (!urlOrId) return '';
       const str = urlOrId.trim();
@@ -347,27 +337,39 @@
       return (match && match[2].length === 11) ? match[2] : str;
     }
 
-    function renderApps() {
-      const apps = getApps();
-      const container = document.getElementById('appsList');
-      if (!container) return;
-      container.innerHTML = '';
+    function openModal() { document.getElementById('adminModal').classList.remove('hidden'); }
+    function closeModal() { document.getElementById('adminModal').classList.add('hidden'); document.getElementById('appForm').reset(); }
 
-      apps.forEach(app => {
-        const videoEmbed = app.videoId 
-          ? `<iframe class="w-full h-44 rounded-xl border border-slate-800" src="https://www.youtube.com/embed/${app.videoId}" allowfullscreen></iframe>`
-          : `<div class="w-full h-44 rounded-xl bg-slate-950/70 border border-slate-800 flex flex-col items-center justify-center text-slate-500 font-mono text-xs"><i class="fa-solid fa-video-slash text-2xl mb-1"></i>वीडियो उपलब्ध नहीं है</div>`;
+    function promptVideoUpdate() {
+      document.getElementById('videoPromptModal').classList.remove('hidden');
+    }
+    function closeVideoPrompt() {
+      document.getElementById('videoPromptModal').classList.add('hidden');
+      document.getElementById('newVideoUrlInput').value = '';
+    }
+    function confirmVideoUpdate() {
+      const rawUrl = document.getElementById('newVideoUrlInput').value;
+      const vidId = extractYouTubeId(rawUrl);
+      if (vidId) {
+        document.getElementById('priyaIframe').src = "https://www.youtube.com/embed/" + vidId;
+        localStorage.setItem('priya_video_id', vidId);
+        showToast('वीडियो अपडेट कर दिया गया!');
+      }
+      closeVideoPrompt();
+    }
 
-        const card = document.createElement('div');
-        card.className = "cyber-card rounded-2xl p-5 flex flex-col justify-between";
-        card.innerHTML = `
-          <div>
-            <div class="flex items-center justify-between mb-3">
-              <span class="px-2.5 py-1 rounded-full bg-cyan-950 border border-cyan-400/40 text-cyan-300 text-[10px] font-mono font-bold">${app.version || 'v1.0'}</span>
-              <span class="text-xs text-slate-400 font-mono"><i class="fa-solid fa-hard-drive text-cyan-400"></i> ${app.size || '38.82 MB'}</span>
-            </div>
-            <h4 class="font-cyber font-bold text-lg text-white mb-2">${app.title}</h4>
-            <p class="text-xs text-slate-300 font-mono mb-4 leading-relaxed">${app.desc || ''}</p>
-            <div class="mb-4">${videoEmbed}</div>
-          </div>
-          <div class="pt-3 border-t borde
+    document.getElementById('appForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const title = document.getElementById('formTitle').value.trim();
+      const downloadUrl = document.getElementById('formDownload').value.trim();
+      const size = document.getElementById('formSize').value.trim() || 'APK';
+      const video = document.getElementById('formVideo').value.trim();
+      const vidId = extractYouTubeId(video);
+
+      const dynamicContainer = document.getElementById('dynamicAppsContainer');
+      const card = document.createElement('div');
+      card.className = "cyber-card rounded-2xl p-5 flex flex-col justify-between";
+      card.innerHTML = `
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="px-2.5 py-1 rounded-full bg-cyan-950 border border-cyan-400/40 text-cyan-300 text-[10px] font-mono font-bol
