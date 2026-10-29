@@ -188,7 +188,7 @@
           <i class="fa-solid fa-microchip text-neonCyan"></i>
           <span>ALL AI APPS & MOD TOOLS</span>
         </h3>
-        <p class="text-xs text-slate-400 font-mono mt-1">आप किसी भी ऐप का डाउनलोड लिंक और अलग लोगो यहाँ जोड़ सकते हैं।</p>
+        <p class="text-xs text-slate-400 font-mono mt-1">आप किसी भी ऐप का डाउनलोड लिंक, वीडियो और टेलीग्राम लिंक यहाँ जोड़ सकते हैं।</p>
       </div>
 
       <button onclick="openModal()" class="px-4 py-2 rounded-xl bg-cyan-950 border border-cyan-400/50 text-cyan-300 hover:bg-cyan-900/60 text-xs font-semibold flex items-center gap-2 w-max">
@@ -217,10 +217,10 @@
           <i class="fa-solid fa-bolt text-yellow-400"></i>
           <span>नया ऐप जोड़ें (Add App)</span>
         </h3>
-        <p class="text-xs text-slate-400 mt-1 font-mono">नाम और Releases वाला APK लिंक डालें!</p>
+        <p class="text-xs text-slate-400 mt-1 font-mono">नाम, डाउनलोड लिंक, वीडियो और टेलीग्राम लिंक डालें</p>
       </div>
 
-      <form id="appForm" class="space-y-4 text-xs">
+      <form id="appForm" class="space-y-3.5 text-xs">
         <input type="hidden" id="formAppId" value="">
 
         <!-- Step 1: Name -->
@@ -236,7 +236,7 @@
         <div class="bg-slate-900/80 p-3 rounded-xl border border-cyan-500/20">
           <label class="block font-bold text-cyan-300 mb-1.5 flex items-center gap-1.5">
             <span class="w-5 h-5 rounded-full bg-cyan-500 text-black flex items-center justify-center text-[11px] font-mono font-black">2</span>
-            APK डाउनलोड लिंक डालें (Releases / Drive Link)*
+            APK डाउनलोड लिंक डालें (Releases / Direct Link)*
           </label>
           <input type="url" id="formDownload" required placeholder="https://github.com/adhirahacker/Adhira/releases/download/..." class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2.5 text-white text-xs focus:outline-none focus:border-neonCyan">
         </div>
@@ -253,13 +253,22 @@
           </div>
         </div>
 
-        <!-- Step 4: Video (Optional) -->
+        <!-- Step 4: YouTube Video (Optional / Unlisted) -->
         <div class="bg-slate-900/80 p-3 rounded-xl border border-cyan-500/20">
-          <label class="block font-bold text-cyan-300 mb-1.5 flex items-center gap-1.5">
-            <span class="w-5 h-5 rounded-full bg-cyan-500 text-black flex items-center justify-center text-[11px] font-mono font-black">3</span>
-            YouTube वीडियो लिंक (अगर वीडियो लगाना चाहते हैं)
+          <label class="block font-bold text-red-400 mb-1.5 flex items-center gap-1.5">
+            <i class="fa-brands fa-youtube text-red-500 text-sm"></i>
+            YouTube वीडियो लिंक (Public या Unlisted)
           </label>
           <input type="text" id="formVideo" placeholder="https://youtube.com/watch?v=... (खाली भी छोड़ सकते हैं)" class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2.5 text-white text-xs focus:outline-none focus:border-neonCyan">
+        </div>
+
+        <!-- Step 5: Telegram Channel/Post Link (Optional) -->
+        <div class="bg-slate-900/80 p-3 rounded-xl border border-cyan-500/20">
+          <label class="block font-bold text-sky-400 mb-1.5 flex items-center gap-1.5">
+            <i class="fa-brands fa-telegram text-sky-400 text-sm"></i>
+            टेलीग्राम लिंक (चैनल या वीडियो पोस्ट लिंक)
+          </label>
+          <input type="url" id="formTelegram" placeholder="https://t.me/your_channel_or_post (खाली भी छोड़ सकते हैं)" class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2.5 text-white text-xs focus:outline-none focus:border-neonCyan">
         </div>
 
         <div class="pt-2 flex gap-3">
@@ -273,25 +282,39 @@
     </div>
   </div>
 
-  <!-- ================= UPDATE VIDEO ONLY MODAL ================= -->
-  <div id="videoPromptModal" class="fixed inset-0 bg-black/85 backdrop-blur-md z-50 flex items-center justify-center p-4 hidden">
+  <!-- ================= UPDATE VIDEO & TELEGRAM MODAL ================= -->
+  <div id="linksPromptModal" class="fixed inset-0 bg-black/85 backdrop-blur-md z-50 flex items-center justify-center p-4 hidden">
     <div class="cyber-card rounded-2xl w-full max-w-md p-6 relative">
-      <button onclick="closeVideoPrompt()" class="absolute top-4 right-4 text-slate-400 hover:text-white text-xl">
+      <button onclick="closeLinksPrompt()" class="absolute top-4 right-4 text-slate-400 hover:text-white text-xl">
         <i class="fa-solid fa-xmark"></i>
       </button>
 
-      <h3 class="font-cyber text-base md:text-lg text-red-400 flex items-center gap-2 mb-2">
-        <i class="fa-brands fa-youtube text-red-500"></i>
-        <span>सेटअप वीडियो बदलें / अपडेट करें</span>
+      <h3 class="font-cyber text-base md:text-lg text-cyan-300 flex items-center gap-2 mb-3">
+        <i class="fa-solid fa-link text-neonCyan"></i>
+        <span>YouTube और Telegram लिंक अपडेट करें</span>
       </h3>
-      <p class="text-xs text-slate-400 font-mono mb-4">नया YouTube वीडियो लिंक डालें:</p>
 
-      <input type="hidden" id="videoAppTargetId" value="">
-      <input type="text" id="newVideoUrlInput" placeholder="https://youtube.com/watch?v=..." class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2.5 text-white text-xs focus:outline-none focus:border-neonCyan mb-4">
+      <input type="hidden" id="linksAppTargetId" value="">
+
+      <div class="space-y-3 mb-4 text-xs">
+        <div>
+          <label class="block text-red-400 font-bold mb-1 flex items-center gap-1">
+            <i class="fa-brands fa-youtube"></i> YouTube वीडियो लिंक
+          </label>
+          <input type="text" id="updateVideoInput" placeholder="https://youtube.com/watch?v=..." class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2.5 text-white text-xs focus:outline-none focus:border-neonCyan">
+        </div>
+
+        <div>
+          <label class="block text-sky-400 font-bold mb-1 flex items-center gap-1">
+            <i class="fa-brands fa-telegram"></i> Telegram लिंक
+          </label>
+          <input type="url" id="updateTelegramInput" placeholder="https://t.me/..." class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2.5 text-white text-xs focus:outline-none focus:border-neonCyan">
+        </div>
+      </div>
 
       <div class="flex justify-end gap-2 text-xs">
-        <button onclick="closeVideoPrompt()" class="px-4 py-2 bg-slate-800 text-slate-300 rounded-lg">रद्द करें</button>
-        <button onclick="confirmVideoUpdate()" class="px-4 py-2 bg-red-600 hover:bg-red-500 text-white font-bold rounded-lg">अपडेट करें</button>
+        <button onclick="closeLinksPrompt()" class="px-4 py-2 bg-slate-800 text-slate-300 rounded-lg font-bold">रद्द करें</button>
+        <button onclick="confirmLinksUpdate()" class="px-4 py-2 bg-gradient-to-r from-neonCyan to-blue-600 text-black font-cyber font-bold rounded-lg shadow-electric">अपडेट करें</button>
       </div>
     </div>
   </div>
@@ -350,7 +373,7 @@
       reader.readAsDataURL(file);
     }
 
-    // 1. मुख्य ब्रांड लोगो हैंडलिंग (Main Header/Hero Logo)
+    // 1. मुख्य ब्रांड लोगो हैंडलिंग
     function fallbackToDefaultLogo(imgEl) {
       const savedLogo = localStorage.getItem('adhira_brand_main_logo');
       imgEl.src = savedLogo ? savedLogo : fallbackNinjaLogo;
@@ -511,14 +534,23 @@
               <span>${app.image ? 'इस ऐप का लोगो बदलें' : '🖼️ इस ऐप का लोगो / फोटो डालें'}</span>
             </button>
 
+            <!-- Telegram Button (अगर लिंक मौजूद है) -->
+            ${app.telegramUrl ? `
+              <a href="${app.telegramUrl}" target="_blank" rel="noopener noreferrer" class="w-full py-2.5 rounded-xl bg-slate-900 hover:bg-sky-950 border border-sky-500/50 text-sky-300 font-mono text-xs font-bold flex items-center justify-center gap-2 transition shadow-sm">
+                <i class="fa-brands fa-telegram text-sky-400 text-base"></i>
+                <span>Watch Tutorial on Telegram</span>
+              </a>
+            ` : ''}
+
+            <!-- Main Download Button -->
             <a href="${app.downloadUrl}" target="_blank" rel="noopener noreferrer" class="w-full py-3.5 rounded-xl bg-gradient-to-r from-neonCyan via-blue-600 to-neonCyan text-black font-cyber font-black text-sm tracking-wider flex items-center justify-center gap-2.5 shadow-electric hover:brightness-110 active:scale-[0.98] transition">
               <i class="fa-solid fa-download text-base"></i>
               <span>DOWNLOAD APK NOW</span>
             </a>
 
             <div class="flex items-center justify-between pt-1">
-              <button onclick="promptUpdateVideo('${app.id}')" class="text-xs text-slate-400 hover:text-cyan-300 font-mono flex items-center gap-1">
-                <i class="fa-brands fa-youtube text-red-400"></i> ${ytId ? 'वीडियो बदलें' : '+ वीडियो जोड़ें'}
+              <button onclick="openLinksPrompt('${app.id}')" class="text-xs text-slate-400 hover:text-cyan-300 font-mono flex items-center gap-1.5">
+                <i class="fa-solid fa-pen-to-square text-cyan-400"></i> लिंक बदलें (Video / Telegram)
               </button>
               <button onclick="deleteApp('${app.id}')" class="text-xs text-red-400 hover:text-red-300 font-mono flex items-center gap-1">
                 <i class="fa-solid fa-trash-can"></i> डिलीट करें
@@ -550,28 +582,35 @@
       }
     }
 
-    function promptUpdateVideo(id) {
-      document.getElementById('videoAppTargetId').value = id;
-      document.getElementById('newVideoUrlInput').value = '';
-      document.getElementById('videoPromptModal').classList.remove('hidden');
-    }
-
-    function closeVideoPrompt() {
-      document.getElementById('videoPromptModal').classList.add('hidden');
-    }
-
-    function confirmVideoUpdate() {
-      const id = document.getElementById('videoAppTargetId').value;
-      const url = document.getElementById('newVideoUrlInput').value.trim();
+    // Links update handler (YouTube + Telegram)
+    function openLinksPrompt(id) {
+      document.getElementById('linksAppTargetId').value = id;
       const apps = getApps();
       const target = apps.find(a => a.id === id);
+      document.getElementById('updateVideoInput').value = target && target.videoId ? `https://youtube.com/watch?v=${target.videoId}` : '';
+      document.getElementById('updateTelegramInput').value = target && target.telegramUrl ? target.telegramUrl : '';
+      document.getElementById('linksPromptModal').classList.remove('hidden');
+    }
+
+    function closeLinksPrompt() {
+      document.getElementById('linksPromptModal').classList.add('hidden');
+    }
+
+    function confirmLinksUpdate() {
+      const id = document.getElementById('linksAppTargetId').value;
+      const videoUrl = document.getElementById('updateVideoInput').value.trim();
+      const telegramUrl = document.getElementById('updateTelegramInput').value.trim();
+      
+      let apps = getApps();
+      const target = apps.find(a => a.id === id);
       if (target) {
-        target.videoId = extractYouTubeId(url);
+        target.videoId = extractYouTubeId(videoUrl);
+        target.telegramUrl = telegramUrl;
         saveApps(apps);
         renderApps();
-        showToast('वीडियो अपडेट हो गया!');
+        showToast('लिंक्स सफलतापूर्वक अपडेट हो गए!');
       }
-      closeVideoPrompt();
+      closeLinksPrompt();
     }
 
     document.getElementById('appForm').addEventListener('submit', function(e) {
@@ -582,6 +621,7 @@
       const size = document.getElementById('formSize').value.trim() || '38.8 MB';
       const version = document.getElementById('formVersion').value.trim() || 'v1.0';
       const videoId = document.getElementById('formVideo').value.trim();
+      const telegramUrl = document.getElementById('formTelegram').value.trim();
 
       let apps = getApps();
 
@@ -592,6 +632,7 @@
         size: size,
         downloadUrl: downloadUrl,
         videoId: extractYouTubeId(videoId),
+        telegramUrl: telegramUrl,
         image: ''
       };
 
@@ -599,7 +640,7 @@
       saveApps(apps);
       renderApps();
       closeModal();
-      showToast('नया ऐप जुड़ गया! अब कार्ड में दिए बटन से इस ऐप का लोगो सेट करें।');
+      showToast('नया ऐप जुड़ गया!');
     });
 
     window.addEventListener('DOMContentLoaded', () => {
