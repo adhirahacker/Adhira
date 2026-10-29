@@ -66,20 +66,21 @@
     }
   </style>
 </head>
-<body class="font-sans flex flex-col justify-between selection:bg-neonCyan selection:text-black min-h-screen">
+<body class="font-sans flex flex-col justify-between selection:bg-neonCyan selection:text-black">
 
-  <!-- TOAST -->
+  <!-- ================= NOTIFICATION TOAST ================= -->
   <div id="toast" class="fixed top-5 right-5 z-50 transform translate-x-full opacity-0 transition-all duration-300 pointer-events-none px-4 py-3 rounded-xl bg-slate-900 border border-cyan-400 text-cyan-300 shadow-electric text-xs font-mono flex items-center gap-2">
     <i class="fa-solid fa-circle-check text-emerald-400 text-sm"></i>
     <span id="toastMsg">Action Done!</span>
   </div>
 
-  <!-- HEADER -->
+  <!-- ================= TOP NAVIGATION / BRANDING ================= -->
   <header class="sticky top-0 z-40 bg-slate-950/90 border-b border-cyan-500/30 backdrop-blur-md px-4 py-3">
     <div class="max-w-7xl mx-auto flex items-center justify-between">
       
+      <!-- Main Brand Logo (Header) -->
       <div class="flex items-center gap-3">
-        <label for="logoUploadInput" class="cursor-pointer group relative w-12 h-12 md:w-14 md:h-14 rounded-full p-0.5 bg-gradient-to-tr from-cyan-400 via-blue-600 to-cyan-200 shadow-electric shrink-0" title="लोगो बदलने के लिए टैप करें">
+        <label for="mainBrandLogoInput" class="cursor-pointer group relative w-12 h-12 md:w-14 md:h-14 rounded-full p-0.5 bg-gradient-to-tr from-cyan-400 via-blue-600 to-cyan-200 shadow-electric shrink-0" title="लोगो बदलने के लिए टैप करें">
           <img 
             id="brandNavLogo"
             src="" 
@@ -106,8 +107,9 @@
         </div>
       </div>
 
+      <!-- Quick Actions -->
       <div class="flex items-center gap-2">
-        <label for="logoUploadInput" class="cursor-pointer px-3 py-2 rounded-xl bg-slate-900 border border-cyan-500/40 text-cyan-300 hover:bg-cyan-950 text-xs font-mono flex items-center gap-1.5 shadow-sm">
+        <label for="mainBrandLogoInput" class="cursor-pointer px-3 py-2 rounded-xl bg-slate-900 border border-cyan-500/40 text-cyan-300 hover:bg-cyan-950 text-xs font-mono flex items-center gap-1.5 shadow-sm">
           <i class="fa-solid fa-image text-cyan-400"></i>
           <span class="hidden sm:inline">Set Logo</span>
         </label>
@@ -121,16 +123,19 @@
     </div>
   </header>
 
-  <input type="file" id="logoUploadInput" accept="image/*" class="hidden" onchange="handleLogoUpload(event)">
-  <!-- HIDDEN INPUT FOR CHANGING APP POSTER DIRECTLY FROM CARD -->
-  <input type="file" id="cardPosterUploadInput" accept="image/*" class="hidden" onchange="handleCardPosterUpload(event)">
+  <!-- Separate Hidden File Inputs -->
+  <!-- 1. केवल मुख्य वेबसाइट का ब्रांड लोगो बदलने के लिए -->
+  <input type="file" id="mainBrandLogoInput" accept="image/*" class="hidden" onchange="handleMainBrandLogoUpload(event)">
+  <!-- 2. केवल ऐप कार्ड का पोस्टर/लोगो बदलने के लिए -->
+  <input type="file" id="appSpecificLogoInput" accept="image/*" class="hidden" onchange="handleAppSpecificLogoUpload(event)">
 
-  <!-- HERO SECTION -->
+  <!-- ================= HERO SHOWCASE WITH YOUR MAIN LOGO ================= -->
   <section class="max-w-7xl mx-auto px-4 pt-6 pb-2">
     <div class="cyber-card rounded-3xl p-6 md:p-8 relative overflow-hidden text-center">
       <div class="absolute -top-16 left-1/2 -translate-x-1/2 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none"></div>
 
       <div class="flex flex-col items-center">
+        <!-- Main Large Logo Display (वेबसाइट का मुख्य लोगो) -->
         <div class="relative w-36 h-36 md:w-48 md:h-48 rounded-3xl p-1 bg-gradient-to-tr from-cyan-400 via-blue-600 to-purple-600 shadow-lightning mb-4 group transition duration-300">
           <img 
             id="brandHeroLogo"
@@ -139,16 +144,16 @@
             class="w-full h-full object-cover rounded-2xl bg-slate-900" 
             onerror="fallbackToDefaultLogo(this)"
           >
-          <label for="logoUploadInput" class="absolute inset-0 bg-black/60 rounded-2xl flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 cursor-pointer transition">
+          <label for="mainBrandLogoInput" class="absolute inset-0 bg-black/60 rounded-2xl flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 cursor-pointer transition">
             <i class="fa-solid fa-camera text-2xl text-cyan-300 mb-1"></i>
-            <span class="text-[10px] text-cyan-200 font-mono font-bold">लोगो बदलें</span>
+            <span class="text-[10px] text-cyan-200 font-mono font-bold">मुख्य लोगो बदलें</span>
           </label>
           <div class="absolute -bottom-3 inset-x-0 mx-auto w-max px-3 py-0.5 rounded-full bg-cyan-950 border border-cyan-400 text-cyan-300 text-[10px] font-mono font-bold tracking-widest uppercase shadow">
             ⚡ VERIFIED CREATOR ⚡
           </div>
         </div>
 
-        <button onclick="document.getElementById('logoUploadInput').click()" class="text-xs text-cyan-400 hover:text-cyan-200 underline font-mono mb-2 flex items-center gap-1.5">
+        <button onclick="document.getElementById('mainBrandLogoInput').click()" class="text-xs text-cyan-400 hover:text-cyan-200 underline font-mono mb-2 flex items-center gap-1.5">
           <i class="fa-solid fa-upload"></i> गैलरी से अपना मुख्य लोगो सेलेक्ट करें
         </button>
 
@@ -158,19 +163,25 @@
         <p class="text-xs md:text-sm text-cyan-300/90 font-mono mt-2 max-w-2xl">
           अपने मोबाइल को AI से पावरफुल बनाएं। गेमिंग असिस्टेंट, एनिमी रडार और ऑटोमेशन टूल्स सीधे APK डाउनलोड करें।
         </p>
+
+        <div class="mt-4 inline-flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-slate-900/90 border border-cyan-500/40 text-xs font-mono text-slate-300">
+          <i class="fa-solid fa-link text-neonCyan"></i>
+          <span>आपकी वेबसाइट का लिंक: <strong class="text-cyan-300">adhirahacker.github.io/Adhira</strong></span>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- APPS LIST SECTION -->
-  <main class="max-w-7xl mx-auto px-4 md:px-8 py-8 space-y-10 flex-1">
+  <!-- ================= MAIN SECTION: APPS LIST ================= -->
+  <main class="max-w-7xl mx-auto px-4 md:px-8 py-8 space-y-10">
+
     <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-cyan-500/20 pb-4">
       <div>
         <h3 class="font-cyber text-xl md:text-2xl font-bold text-white flex items-center gap-2.5">
           <i class="fa-solid fa-microchip text-neonCyan"></i>
           <span>ALL AI APPS & MOD TOOLS</span>
         </h3>
-        <p class="text-xs text-slate-400 font-mono mt-1">आप किसी भी ऐप का लोगो/पोस्टर सीधे कार्ड से बदल सकते हैं।</p>
+        <p class="text-xs text-slate-400 font-mono mt-1">आप किसी भी ऐप का डाउनलोड लिंक और अलग लोगो यहाँ जोड़ सकते हैं।</p>
       </div>
 
       <button onclick="openModal()" class="px-4 py-2 rounded-xl bg-cyan-950 border border-cyan-400/50 text-cyan-300 hover:bg-cyan-900/60 text-xs font-semibold flex items-center gap-2 w-max">
@@ -179,19 +190,22 @@
       </button>
     </div>
 
-    <!-- Cards Container -->
-    <div id="appsList" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8"></div>
+    <!-- Apps Catalog Grid -->
+    <div id="appsList" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
+      <!-- Cards will render here -->
+    </div>
+
   </main>
 
-  <!-- ADD / EDIT MODAL -->
+  <!-- ================= ADD / EDIT APP MODAL ================= -->
   <div id="adminModal" class="fixed inset-0 bg-black/85 backdrop-blur-md z-50 flex items-center justify-center p-4 hidden">
-    <div class="cyber-card rounded-2xl w-full max-w-md p-6 relative max-h-[92vh] overflow-y-auto">
+    <div class="cyber-card rounded-2xl w-full max-w-md p-6 relative max-h-[90vh] overflow-y-auto">
       
       <button onclick="closeModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white text-xl">
         <i class="fa-solid fa-xmark"></i>
       </button>
 
-      <div class="mb-4 text-center">
+      <div class="mb-5 text-center">
         <h3 id="modalHeading" class="font-cyber text-lg md:text-xl text-neonCyan flex items-center justify-center gap-2">
           <i class="fa-solid fa-bolt text-yellow-400"></i>
           <span>नया ऐप जोड़ें (Add App)</span>
@@ -199,25 +213,28 @@
         <p class="text-xs text-slate-400 mt-1 font-mono">नाम और Releases वाला APK लिंक डालें!</p>
       </div>
 
-      <form id="appForm" class="space-y-3.5 text-xs">
+      <form id="appForm" class="space-y-4 text-xs">
         <input type="hidden" id="formAppId" value="">
 
+        <!-- Step 1: Name -->
         <div class="bg-slate-900/80 p-3 rounded-xl border border-cyan-500/20">
-          <label class="block font-bold text-cyan-300 mb-1 flex items-center gap-1.5">
-            <span class="w-5 h-5 rounded-full bg-cyan-500 text-black flex items-center justify-center text-[10px] font-mono font-black">1</span>
+          <label class="block font-bold text-cyan-300 mb-1.5 flex items-center gap-1.5">
+            <span class="w-5 h-5 rounded-full bg-cyan-500 text-black flex items-center justify-center text-[11px] font-mono font-black">1</span>
             ऐप का नाम लिखें (App Name)*
           </label>
           <input type="text" id="formTitle" required placeholder="जैसे: Priya AI, Radar Hack..." class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2.5 text-white text-xs focus:outline-none focus:border-neonCyan">
         </div>
 
+        <!-- Step 2: Download Link -->
         <div class="bg-slate-900/80 p-3 rounded-xl border border-cyan-500/20">
-          <label class="block font-bold text-cyan-300 mb-1 flex items-center gap-1.5">
-            <span class="w-5 h-5 rounded-full bg-cyan-500 text-black flex items-center justify-center text-[10px] font-mono font-black">2</span>
-            APK डाउनलोड लिंक डालें (Releases Link)*
+          <label class="block font-bold text-cyan-300 mb-1.5 flex items-center gap-1.5">
+            <span class="w-5 h-5 rounded-full bg-cyan-500 text-black flex items-center justify-center text-[11px] font-mono font-black">2</span>
+            APK डाउनलोड लिंक डालें (Releases / Drive Link)*
           </label>
           <input type="url" id="formDownload" required placeholder="https://github.com/adhirahacker/Adhira/releases/download/..." class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2.5 text-white text-xs focus:outline-none focus:border-neonCyan">
         </div>
 
+        <!-- Step 3: Size & Version -->
         <div class="grid grid-cols-2 gap-3">
           <div class="bg-slate-900/80 p-3 rounded-xl border border-cyan-500/20">
             <label class="block font-bold text-cyan-300 mb-1">फ़ाइल साइज़</label>
@@ -229,14 +246,13 @@
           </div>
         </div>
 
+        <!-- Step 4: Video (Optional) -->
         <div class="bg-slate-900/80 p-3 rounded-xl border border-cyan-500/20">
-          <label class="block font-bold text-cyan-300 mb-1">ऐप का विवरण (Description / Features)</label>
-          <textarea id="formDesc" rows="2" placeholder="ऐप के खास फ़ीचर्स लिखें (वैकल्पिक)..." class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2 text-white text-xs focus:outline-none focus:border-neonCyan"></textarea>
-        </div>
-
-        <div class="bg-slate-900/80 p-3 rounded-xl border border-cyan-500/20">
-          <label class="block font-bold text-cyan-300 mb-1">YouTube वीडियो लिंक (वैकल्पिक)</label>
-          <input type="text" id="formVideo" placeholder="https://youtube.com/watch?v=... (खाली छोड़ सकते हैं)" class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2 text-white text-xs focus:outline-none focus:border-neonCyan">
+          <label class="block font-bold text-cyan-300 mb-1.5 flex items-center gap-1.5">
+            <span class="w-5 h-5 rounded-full bg-cyan-500 text-black flex items-center justify-center text-[11px] font-mono font-black">3</span>
+            YouTube वीडियो लिंक (अगर वीडियो लगाना चाहते हैं)
+          </label>
+          <input type="text" id="formVideo" placeholder="https://youtube.com/watch?v=... (खाली भी छोड़ सकते हैं)" class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2.5 text-white text-xs focus:outline-none focus:border-neonCyan">
         </div>
 
         <div class="pt-2 flex gap-3">
@@ -250,7 +266,30 @@
     </div>
   </div>
 
-  <!-- FOOTER -->
+  <!-- ================= UPDATE VIDEO ONLY MODAL ================= -->
+  <div id="videoPromptModal" class="fixed inset-0 bg-black/85 backdrop-blur-md z-50 flex items-center justify-center p-4 hidden">
+    <div class="cyber-card rounded-2xl w-full max-w-md p-6 relative">
+      <button onclick="closeVideoPrompt()" class="absolute top-4 right-4 text-slate-400 hover:text-white text-xl">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+
+      <h3 class="font-cyber text-base md:text-lg text-red-400 flex items-center gap-2 mb-2">
+        <i class="fa-brands fa-youtube text-red-500"></i>
+        <span>सेटअप वीडियो बदलें / अपडेट करें</span>
+      </h3>
+      <p class="text-xs text-slate-400 font-mono mb-4">नया YouTube वीडियो लिंक डालें:</p>
+
+      <input type="hidden" id="videoAppTargetId" value="">
+      <input type="text" id="newVideoUrlInput" placeholder="https://youtube.com/watch?v=..." class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2.5 text-white text-xs focus:outline-none focus:border-neonCyan mb-4">
+
+      <div class="flex justify-end gap-2 text-xs">
+        <button onclick="closeVideoPrompt()" class="px-4 py-2 bg-slate-800 text-slate-300 rounded-lg">रद्द करें</button>
+        <button onclick="confirmVideoUpdate()" class="px-4 py-2 bg-red-600 hover:bg-red-500 text-white font-bold rounded-lg">अपडेट करें</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= FOOTER ================= -->
   <footer class="cyber-card border-t border-cyan-500/20 py-6 text-center text-xs text-slate-400 mt-12">
     <div class="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-3">
       <div class="flex items-center gap-2">
@@ -259,62 +298,63 @@
       </div>
       <div class="flex items-center gap-4 text-sm text-cyan-400 font-mono">
         <span><i class="fa-solid fa-shield-halved text-emerald-400"></i> 100% Anti-Ban Safe</span>
-        <span><i class="fa-solid fa-bolt text-yellow-400"></i> High Speed Direct Servers</span>
+        <span><i class="fa-solid fa-bolt text-yellow-400"></i> High Speed Servers</span>
       </div>
     </div>
   </footer>
 
-  <!-- LOGIC SCRIPT -->
+  <!-- ================= LOGIC SCRIPT ================= -->
   <script>
     const fallbackNinjaLogo = "data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 400'%3E%3Cdefs%3E%3ClinearGradient id='bg' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%23050b1a'/%3E%3Cstop offset='100%25' stop-color='%230b1b3d'/%3E%3C/linearGradient%3E%3ClinearGradient id='neon' x1='0%25' y1='0%25' x2='100%25' y2='0%25'%3E%3Cstop offset='0%25' stop-color='%2300e5ff'/%3E%3Cstop offset='100%25' stop-color='%230066ff'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='400' height='400' fill='url(%23bg)'/%3E%3Ccircle cx='200' cy='200' r='160' fill='none' stroke='%2300e5ff' stroke-width='6' stroke-dasharray='12 8'/%3E%3Cpath d='M70 70 L330 330 M330 70 L70 330' stroke='%230066ff' stroke-width='14' stroke-linecap='round'/%3E%3Cpath d='M140 180 C140 130 170 100 200 100 C230 100 260 130 260 180 L250 250 L150 250 Z' fill='%23111827' stroke='%2300e5ff' stroke-width='6'/%3E%3Cpolygon points='160,190 200,165 240,190 220,240 180,240' fill='%231f2937' stroke='%2300e5ff' stroke-width='3'/%3E%3Ccircle cx='180' cy='180' r='7' fill='%2300e5ff' filter='drop-shadow(0 0 8px %2300e5ff)'/%3E%3Ccircle cx='220' cy='180' r='7' fill='%2300e5ff' filter='drop-shadow(0 0 8px %2300e5ff)'/%3E%3Cpolygon points='200,245 185,280 205,280 190,320 225,270 205,270' fill='%23facc15' stroke='%23facc15' stroke-width='2'/%3E%3Crect x='40' y='320' width='320' height='45' rx='10' fill='%23030712' stroke='%2300e5ff' stroke-width='3'/%3E%3Ctext x='200' y='352' font-family='Arial, sans-serif' font-weight='900' font-size='22' fill='%2300e5ff' text-anchor='middle' letter-spacing='2'%3EADHIRA HACKER%3C/text%3E%3C/svg%3E";
 
-    let currentTargetAppIdForPoster = null;
+    let targetAppIdForLogo = null;
 
+    // 1. मुख्य ब्रांड लोगो हैंडलिंग (Main Header/Hero Logo)
     function fallbackToDefaultLogo(imgEl) {
-      const savedLogo = localStorage.getItem('adhira_custom_logo');
+      const savedLogo = localStorage.getItem('adhira_brand_main_logo');
       imgEl.src = savedLogo ? savedLogo : fallbackNinjaLogo;
     }
 
-    function syncLogos() {
-      const savedLogo = localStorage.getItem('adhira_custom_logo') || fallbackNinjaLogo;
+    function syncMainLogos() {
+      const savedLogo = localStorage.getItem('adhira_brand_main_logo') || fallbackNinjaLogo;
       const nav = document.getElementById('brandNavLogo');
       const hero = document.getElementById('brandHeroLogo');
       if (nav) nav.src = savedLogo;
       if (hero) hero.src = savedLogo;
     }
 
-    function handleLogoUpload(event) {
+    function handleMainBrandLogoUpload(event) {
       const file = event.target.files[0];
       if (!file) return;
+
       const reader = new FileReader();
       reader.onload = function(e) {
-        localStorage.setItem('adhira_custom_logo', e.target.result);
-        syncLogos();
-        showToast('मुख्य लोगो अपडेट हो गया!');
+        localStorage.setItem('adhira_brand_main_logo', e.target.result);
+        syncMainLogos();
+        showToast('मुख्य ब्रांड लोगो अपडेट हो गया!');
       };
       reader.readAsDataURL(file);
     }
 
-    // FUNCTION TO TRIGGER APP POSTER UPLOAD DIRECTLY FOR A SPECIFIC APP
-    function triggerAppPosterChange(appId) {
-      currentTargetAppIdForPoster = appId;
-      document.getElementById('cardPosterUploadInput').click();
+    // 2. सिर्फ उस खास ऐप का लोगो बदलने की कार्यप्रणाली
+    function openAppLogoChooser(appId) {
+      targetAppIdForLogo = appId;
+      document.getElementById('appSpecificLogoInput').click();
     }
 
-    function handleCardPosterUpload(event) {
+    function handleAppSpecificLogoUpload(event) {
       const file = event.target.files[0];
-      if (!file || !currentTargetAppIdForPoster) return;
+      if (!file || !targetAppIdForLogo) return;
 
       const reader = new FileReader();
       reader.onload = function(e) {
-        const base64Img = e.target.result;
         let apps = getApps();
-        const target = apps.find(a => a.id === currentTargetAppIdForPoster);
+        const target = apps.find(a => a.id === targetAppIdForLogo);
         if (target) {
-          target.image = base64Img;
+          target.image = e.target.result;
           saveApps(apps);
           renderApps();
-          showToast('ऐप का लोगो/पोस्टर सेट हो गया!');
+          showToast('ऐप का लोगो सफलतापूर्वक सेट हो गया!');
         }
       };
       reader.readAsDataURL(file);
@@ -332,7 +372,11 @@
     function getApps() {
       const data = localStorage.getItem('adhira_hacker_db_v2');
       if (data) {
-        try { return JSON.parse(data); } catch(e) { return []; }
+        try {
+          return JSON.parse(data);
+        } catch(e) {
+          return [];
+        }
       }
       return [];
     }
@@ -344,11 +388,15 @@
     function extractYouTubeId(urlOrId) {
       if (!urlOrId) return '';
       const str = urlOrId.trim();
-      if (str.length === 11 && !str.includes('/') && !str.includes('.')) return str;
-      const match = str.match(/^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/);
+      if (str.length === 11 && !str.includes('/') && !str.includes('.')) {
+        return str;
+      }
+      const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+      const match = str.match(regExp);
       return (match && match[2].length === 11) ? match[2] : '';
     }
 
+    // Render Cards to DOM
     function renderApps() {
       const apps = getApps();
       const container = document.getElementById('appsList');
@@ -370,11 +418,154 @@
         const card = document.createElement('div');
         card.className = "cyber-card rounded-2xl overflow-hidden flex flex-col justify-between transition duration-300";
 
-        // Poster section
-        const posterHtml = app.image 
-          ? `<div class="relative w-full h-52 md:h-64 bg-slate-950 overflow-hidden">
+        // केवल उस ऐप का अपना अलग लोगो/पोस्टर बैनर
+        const appPosterHtml = app.image 
+          ? `<div class="relative w-full h-52 md:h-60 bg-slate-950 overflow-hidden">
                <img src="${app.image}" alt="${app.title}" class="w-full h-full object-cover">
                <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent"></div>
              </div>`
-          : `<div class="relative w-full h-36 bg-gradient-to-r from-cyan-950/40 to-blue-950/40 border-b border-cyan-500/20 flex flex-col items-center justify-center text-cyan-400/50">
-        
+          : `<div class="relative w-full h-32 bg-gradient-to-r from-cyan-950/40 to-blue-950/40 border-b border-cyan-500/20 flex flex-col items-center justify-center text-cyan-400/50">
+               <i class="fa-solid fa-cube text-3xl mb-1"></i>
+               <span class="text-[11px] font-mono">ऐप का लोगो अभी सेट नहीं है</span>
+             </div>`;
+
+        card.innerHTML = `
+          <div>
+            ${appPosterHtml}
+            <div class="p-5 pb-2">
+              <div class="flex items-center justify-between mb-3">
+                <span class="bg-cyan-950/90 border border-cyan-400/60 text-cyan-300 text-xs font-mono font-bold px-2.5 py-0.5 rounded-full shadow-md">
+                  ${app.version || 'v1.0'}
+                </span>
+                <span class="bg-black/70 text-slate-300 text-xs font-mono px-2 py-0.5 rounded-full border border-slate-700">
+                  <i class="fa-solid fa-hard-drive text-cyan-400"></i> ${app.size || '38.82 MB'}
+                </span>
+              </div>
+              <h4 class="font-cyber font-bold text-lg md:text-xl text-white">
+                ${app.title}
+              </h4>
+              <p class="text-xs text-slate-300 font-mono mt-2 leading-relaxed">
+                आधिकारिक ADHIRA HACKER एप्लीकेशन। नीचे दिए गए बटन से डायरेक्ट APK डाउनलोड करें।
+              </p>
+            </div>
+
+            ${ytId ? `
+              <div class="px-5 py-2">
+                <div class="border border-slate-800 rounded-xl p-2.5 bg-slate-950/70">
+                  <div class="relative w-full aspect-video rounded-lg overflow-hidden border border-slate-800 bg-black">
+                    <iframe class="w-full h-full" src="https://www.youtube-nocookie.com/embed/${ytId}" frameborder="0" allowfullscreen></iframe>
+                  </div>
+                </div>
+              </div>
+            ` : ''}
+
+          </div>
+
+          <!-- Bottom Actions: डाउनलोड बटन के ऊपर अलग से ऐप लोगो डालने का बटन -->
+          <div class="p-5 pt-3 space-y-2.5 border-t border-cyan-500/20 mt-3">
+            
+            <!-- BUTTON FOR THIS APP'S LOGO ONLY -->
+            <button onclick="openAppLogoChooser('${app.id}')" class="w-full py-2 bg-slate-900 hover:bg-cyan-950 border border-cyan-500/40 text-cyan-300 rounded-xl text-xs font-mono font-bold flex items-center justify-center gap-2 transition">
+              <i class="fa-solid fa-image text-cyan-400"></i>
+              <span>${app.image ? 'इस ऐप का लोगो बदलें' : '🖼️ इस ऐप का लोगो / फोटो डालें'}</span>
+            </button>
+
+            <!-- BIG DOWNLOAD CTA BUTTON -->
+            <a href="${app.downloadUrl}" target="_blank" rel="noopener noreferrer" class="w-full py-3.5 rounded-xl bg-gradient-to-r from-neonCyan via-blue-600 to-neonCyan text-black font-cyber font-black text-sm tracking-wider flex items-center justify-center gap-2.5 shadow-electric hover:brightness-110 active:scale-[0.98] transition">
+              <i class="fa-solid fa-download text-base"></i>
+              <span>DOWNLOAD APK NOW</span>
+            </a>
+
+            <div class="flex items-center justify-between pt-1">
+              <button onclick="promptUpdateVideo('${app.id}')" class="text-xs text-slate-400 hover:text-cyan-300 font-mono flex items-center gap-1">
+                <i class="fa-brands fa-youtube text-red-400"></i> ${ytId ? 'वीडियो बदलें' : '+ वीडियो जोड़ें'}
+              </button>
+              <button onclick="deleteApp('${app.id}')" class="text-xs text-red-400 hover:text-red-300 font-mono flex items-center gap-1">
+                <i class="fa-solid fa-trash-can"></i> डिलीट करें
+              </button>
+            </div>
+          </div>
+        `;
+
+        container.appendChild(card);
+      });
+    }
+
+    function openModal() {
+      document.getElementById('formAppId').value = '';
+      document.getElementById('appForm').reset();
+      document.getElementById('adminModal').classList.remove('hidden');
+    }
+
+    function closeModal() {
+      document.getElementById('adminModal').classList.add('hidden');
+    }
+
+    function deleteApp(id) {
+      if (confirm('क्या आप इस ऐप को हटाना चाहते हैं?')) {
+        let apps = getApps().filter(a => a.id !== id);
+        saveApps(apps);
+        renderApps();
+        showToast('ऐप हटा दिया गया!');
+      }
+    }
+
+    function promptUpdateVideo(id) {
+      document.getElementById('videoAppTargetId').value = id;
+      document.getElementById('newVideoUrlInput').value = '';
+      document.getElementById('videoPromptModal').classList.remove('hidden');
+    }
+
+    function closeVideoPrompt() {
+      document.getElementById('videoPromptModal').classList.add('hidden');
+    }
+
+    function confirmVideoUpdate() {
+      const id = document.getElementById('videoAppTargetId').value;
+      const url = document.getElementById('newVideoUrlInput').value.trim();
+      const apps = getApps();
+      const target = apps.find(a => a.id === id);
+      if (target) {
+        target.videoId = extractYouTubeId(url);
+        saveApps(apps);
+        renderApps();
+        showToast('वीडियो अपडेट हो गया!');
+      }
+      closeVideoPrompt();
+    }
+
+    document.getElementById('appForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const title = document.getElementById('formTitle').value.trim();
+      const downloadUrl = document.getElementById('formDownload').value.trim();
+      const size = document.getElementById('formSize').value.trim() || '38.82 MB';
+      const version = document.getElementById('formVersion').value.trim() || 'v1.0';
+      const videoId = document.getElementById('formVideo').value.trim();
+
+      let apps = getApps();
+
+      const newEntry = {
+        id: 'app_' + Date.now(),
+        title: title,
+        version: version,
+        size: size,
+        downloadUrl: downloadUrl,
+        videoId: extractYouTubeId(videoId),
+        image: '' // ऐप का लोगो खाली रहेगा, जिसे कार्ड के अंदर दिए गए बटन से अलग से डाला जाएगा
+      };
+
+      apps.unshift(newEntry);
+      saveApps(apps);
+      renderApps();
+      closeModal();
+      showToast('नया ऐप जुड़ गया! अब कार्ड में दिए बटन से इस ऐप का लोगो सेट करें।');
+    });
+
+    window.addEventListener('DOMContentLoaded', () => {
+      syncMainLogos();
+      renderApps();
+    });
+  </script>
+</body>
+</html>
