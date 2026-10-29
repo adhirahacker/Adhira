@@ -236,7 +236,7 @@
         <div class="grid grid-cols-2 gap-3">
           <div class="bg-slate-900/80 p-3 rounded-xl border border-cyan-500/20">
             <label class="block font-bold text-cyan-300 mb-1">फ़ाइल साइज़</label>
-            <input type="text" id="formSize" placeholder="जैसे: 38.82 MB" class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2 text-white text-xs focus:outline-none focus:border-neonCyan">
+            <input type="text" id="formSize" placeholder="जैसे: 38.8 MB" class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2 text-white text-xs focus:outline-none focus:border-neonCyan">
           </div>
           <div class="bg-slate-900/80 p-3 rounded-xl border border-cyan-500/20">
             <label class="block font-bold text-cyan-300 mb-1">वर्जन</label>
@@ -307,7 +307,7 @@
 
     let targetAppIdForLogo = null;
 
-    // ऑटोमैटिक इमेज कंप्रेसर (फ़ोटो साइज़ हल्का करके स्टोर करने के लिए)
+    // ऑटोमैटिक इमेज कंप्रेसर
     function compressImage(file, maxDimension, callback) {
       const reader = new FileReader();
       reader.onload = function(e) {
@@ -333,7 +333,7 @@
           canvas.height = height;
           const ctx = canvas.getContext('2d');
           ctx.drawImage(img, 0, 0, width, height);
-          const compressedDataUrl = canvas.toDataURL('image/jpeg', 0.85);
+          const compressedDataUrl = canvas.toDataURL('image/jpeg', 0.88);
           callback(compressedDataUrl);
         };
         img.src = e.target.result;
@@ -365,12 +365,12 @@
           syncMainLogos();
           showToast('मुख्य ब्रांड लोगो अपडेट हो गया!');
         } catch (err) {
-          alert('फ़ाइल साइज़ बहुत बड़ा है, कृपया कोई दूसरी फ़ोटो चुनें।');
+          alert('फ़ाइल साइज़ बहुत बड़ा है!');
         }
       });
     }
 
-    // 2. सिर्फ उस ऐप का लोगो बदलने की कार्यप्रणाली
+    // 2. सिर्फ उस खास ऐप का लोगो बदलने की कार्यप्रणाली
     function openAppLogoChooser(appId) {
       targetAppIdForLogo = appId;
       document.getElementById('appSpecificLogoInput').click();
@@ -380,7 +380,7 @@
       const file = event.target.files[0];
       if (!file || !targetAppIdForLogo) return;
 
-      compressImage(file, 600, function(compressedData) {
+      compressImage(file, 700, function(compressedData) {
         try {
           let apps = getApps();
           const target = apps.find(a => a.id === targetAppIdForLogo);
@@ -432,7 +432,7 @@
       return (match && match[2].length === 11) ? match[2] : '';
     }
 
-    // Render Cards to DOM
+    // Render Cards to DOM (फ़ोटो पूरी और साफ़ दिखने के लिए अपडेटेड)
     function renderApps() {
       const apps = getApps();
       const container = document.getElementById('appsList');
@@ -454,12 +454,12 @@
         const card = document.createElement('div');
         card.className = "cyber-card rounded-2xl overflow-hidden flex flex-col justify-between transition duration-300";
 
+        // पूरी फ़ोटो दिखाने के लिए object-contain और बिना काले परदे वाला कोड
         const appPosterHtml = app.image 
-          ? `<div class="relative w-full h-52 md:h-60 bg-slate-950 overflow-hidden">
-               <img src="${app.image}" alt="${app.title}" class="w-full h-full object-cover">
-               <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent"></div>
+          ? `<div class="relative w-full min-h-[220px] max-h-[340px] bg-black/60 flex items-center justify-center p-2 border-b border-cyan-500/20 overflow-hidden">
+               <img src="${app.image}" alt="${app.title}" class="max-h-[320px] w-auto max-w-full object-contain rounded-xl shadow-lg">
              </div>`
-          : `<div class="relative w-full h-32 bg-gradient-to-r from-cyan-950/40 to-blue-950/40 border-b border-cyan-500/20 flex flex-col items-center justify-center text-cyan-400/50">
+          : `<div class="relative w-full h-36 bg-gradient-to-r from-cyan-950/40 to-blue-950/40 border-b border-cyan-500/20 flex flex-col items-center justify-center text-cyan-400/50">
                <i class="fa-solid fa-cube text-3xl mb-1"></i>
                <span class="text-[11px] font-mono">ऐप का लोगो अभी सेट नहीं है</span>
              </div>`;
@@ -473,7 +473,7 @@
                   ${app.version || 'v1.0'}
                 </span>
                 <span class="bg-black/70 text-slate-300 text-xs font-mono px-2 py-0.5 rounded-full border border-slate-700">
-                  <i class="fa-solid fa-hard-drive text-cyan-400"></i> ${app.size || '38.82 MB'}
+                  <i class="fa-solid fa-hard-drive text-cyan-400"></i> ${app.size || '38.8 MB'}
                 </span>
               </div>
               <h4 class="font-cyber font-bold text-lg md:text-xl text-white">
@@ -496,6 +496,7 @@
 
           </div>
 
+          <!-- Bottom Actions -->
           <div class="p-5 pt-3 space-y-2.5 border-t border-cyan-500/20 mt-3">
             <button onclick="openAppLogoChooser('${app.id}')" class="w-full py-2 bg-slate-900 hover:bg-cyan-950 border border-cyan-500/40 text-cyan-300 rounded-xl text-xs font-mono font-bold flex items-center justify-center gap-2 transition">
               <i class="fa-solid fa-image text-cyan-400"></i>
@@ -570,7 +571,7 @@
 
       const title = document.getElementById('formTitle').value.trim();
       const downloadUrl = document.getElementById('formDownload').value.trim();
-      const size = document.getElementById('formSize').value.trim() || '38.82 MB';
+      const size = document.getElementById('formSize').value.trim() || '38.8 MB';
       const version = document.getElementById('formVersion').value.trim() || 'v1.0';
       const videoId = document.getElementById('formVideo').value.trim();
 
